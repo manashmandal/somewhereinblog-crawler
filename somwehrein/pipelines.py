@@ -16,7 +16,7 @@ class SomwehreinPipeline:
 
 class MongoPipeline:
 
-    collection_name = "scrapy_items"
+    collection_name = "articles"
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri
@@ -26,7 +26,7 @@ class MongoPipeline:
     def from_crawler(cls, crawler):
         return cls(
             mongo_uri=crawler.settings.get("MONGO_URI"),
-            mongo_db=crawler.settings.get("MONGO_DATABASE", "items"),
+            mongo_db=crawler.settings.get("MONGO_DATABASE", "somewhereinblog"),
         )
 
     def open_spider(self, spider):
@@ -37,5 +37,9 @@ class MongoPipeline:
         self.client.close()
 
     def process_item(self, item, spider):
-        self.db[self.collection_name].insert_one(ItemAdapter(item).asdict())
+        itemdict = ItemAdapter(item).asdict()
+        self.db[self.collection_name].update_one(
+            {"post_id": itemdict["post_id"]}, {"$set": itemdict}, upsert=True
+        )
+        # self.db[self.collection_name].insert_one(itemdict)
         return item
