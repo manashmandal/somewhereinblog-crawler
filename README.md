@@ -13,7 +13,7 @@ pip install -r requirements.txt
 Make sure mongo is either installed on your pc or have access to one. Then just edit the access in `settings.py` file.
 
 ```sh
-scrapy crawl somewhereinblog -a start_date="2017-01-01"
+scrapy crawl somewhereinblog -a start_date="2017/01/01"
 ```
 
 ## Deployment in Docker with Scrapyd [Coming soon....]
