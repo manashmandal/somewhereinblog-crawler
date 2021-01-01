@@ -16,4 +16,4 @@ Make sure mongo is either installed on your pc or have access to one. Then just 
 scrapy crawl somewhereinblog -a start_date="2017-01-01"
 ```
 
-## Deployment in Docker [Coming soon....]
+## Deployment in Docker with Scrapyd [Coming soon....]
