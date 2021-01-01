@@ -1,6 +1,12 @@
 # PID
 *.pid
 dbs
+dump
+*.zip
+*.csv
+somewhereinblog_2017_2020.json
+logs
+crawled_items
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -11,7 +11,7 @@ class SomewhereinblogSpider(scrapy.Spider):
     # allowed_domains = ["somwehreinblog.net"]
     # start_urls = ["https://somwehreinblog.net/"]
 
-    def __init__(self, start_date="2017/01/01", end_date="2017/01/03", *args, **kwargs):
+    def __init__(self, start_date="2019/11/01", end_date="2017/01/03", *args, **kwargs):
         print("kwargs", kwargs)
         self.date_format = "%Y/%m/%d"
         self.start_date = dateparser.parse(start_date)
@@ -28,7 +28,7 @@ class SomewhereinblogSpider(scrapy.Spider):
             "published_at": "//div[@class='single-full-post']/div[@class='author']/text()",
             "title": "//div[@class='single-full-post']/h2//text()",
             "raw_title": "//div[@class='single-full-post']/h2",
-            "post_images": "//div[@class='blog-content']/img[@class='post_image']/@src",
+            "post_images": "//div[@class='blog-content']//img[@class='post_image']/@src",
         }
         self.page_size = 15
 
@@ -39,7 +39,12 @@ class SomewhereinblogSpider(scrapy.Spider):
         }
 
     def parse_post_image_urls(self, response):
-        return response.xpath(self.selectors["post_images"]).extract()
+        *_, nick, post_id = response.url.split("/")
+        return [
+            imgurl
+            for imgurl in response.xpath(self.selectors["post_images"]).extract()
+            if nick in imgurl
+        ]
 
     def parse_post_content(self, response):
         return "".join(response.xpath(self.selectors["blog_content"]).extract())
@@ -52,7 +57,9 @@ class SomewhereinblogSpider(scrapy.Spider):
         published_at_raw = response.xpath(
             self.selectors["published_at"]
         ).extract_first()
-        published_at = dateparser.parse(" ".join(published_at_raw.split()[:-2]))
+        day, _, month, year = published_at_raw.split()[:-2]
+        parsable_date = " ".join([day, month, year])
+        published_at = dateparser.parse(parsable_date)
         return dict(published_at_raw=published_at_raw, published_at=published_at)
 
     def parse_post_meta(self, response):
@@ -102,7 +109,8 @@ class SomewhereinblogSpider(scrapy.Spider):
             content=self.parse_post_content(response),
             post_url=response.url,
             post_image_urls=self.parse_post_image_urls(response),
-            **self.parse_post_title(response) ** self.parse_published_at(response),
+            **self.parse_post_title(response),
+            **self.parse_published_at(response),
             **self.parse_post_meta(response),
         )
 
