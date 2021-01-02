@@ -1,4 +1,4 @@
-# Scrapy settings for somwehrein project
+# Scrapy settings for somewherein project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -14,7 +14,7 @@ NEWSPIDER_MODULE = "somewherein.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'somwehrein (+http://www.yourdomain.com)'
+# USER_AGENT = 'somewherein (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -45,13 +45,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'somwehrein.middlewares.SomwehreinSpiderMiddleware': 543,
+#    'somewherein.middlewares.SomewhereinSpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    'somwehrein.middlewares.SomwehreinDownloaderMiddleware': 543,
+#    'somewherein.middlewares.SomewhereinDownloaderMiddleware': 543,
 # }
 
 # Enable or disable extensions
@@ -63,12 +63,11 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    "somwehrein.pipelines.MongoPipeline": 300,
+    "somewherein.pipelines.MongoPipeline": 300,
 }
 
 MONGO_URI = "mongodb://localhost:27017"
 MONGO_DATABASE = "somewhereinblog"
-
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 # AUTOTHROTTLE_ENABLED = True
