@@ -9,7 +9,7 @@ from itemadapter import ItemAdapter
 import pymongo
 
 
-class SomwehreinPipeline:
+class SomewhereinPipeline:
     def process_item(self, item, spider):
         return item
 

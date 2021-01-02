@@ -7,10 +7,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "somwehrein"
+BOT_NAME = "somewherein"
 
-SPIDER_MODULES = ["somwehrein.spiders"]
-NEWSPIDER_MODULE = "somwehrein.spiders"
+SPIDER_MODULES = ["somewherein.spiders"]
+NEWSPIDER_MODULE = "somewherein.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -63,7 +63,7 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'somwehrein.pipelines.MongoPipeline': 300,
+    "somwehrein.pipelines.MongoPipeline": 300,
 }
 
 MONGO_URI = "mongodb://localhost:27017"
