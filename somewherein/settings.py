@@ -63,11 +63,13 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    "somewherein.pipelines.MongoPipeline": 300,
+    # "somewherein.pipelines.MongoPipeline": 300,
+    "somewherein.pipelines.StoreToDiskPipeline": 400
 }
 
 MONGO_URI = "mongodb://localhost:27017"
 MONGO_DATABASE = "somewhereinblog"
+
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 # AUTOTHROTTLE_ENABLED = True

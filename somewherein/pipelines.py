@@ -7,11 +7,22 @@
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 import pymongo
+import json
+import os
 
 
 class SomewhereinPipeline:
     def process_item(self, item, spider):
         return item
+
+
+class StoreToDiskPipeline:
+    def process_item(self, item, spider):
+        itemdict = ItemAdapter(item).asdict()
+        itemdict["published_at"] = str(itemdict["published_at"])
+        writepath = os.path.join(os.getcwd(), "crawled_items")
+        with open(f"{writepath}/{item['post_id']}.json", "w") as jsonfile:
+            json.dump(itemdict, jsonfile, ensure_ascii=False)
 
 
 class MongoPipeline:
